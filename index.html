@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Babalar Günü Sürprizi</title>
+  <style>
+    body {
+      background-color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
+
+    .envelope {
+      width: 300px;
+      height: 200px;
+      background-color: #c62828;
+      position: relative;
+      cursor: pointer;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+    }
+
+    .envelope:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 150px solid transparent;
+      border-right: 150px solid transparent;
+      border-bottom: 100px solid #e53935;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .message {
+      display: none;
+      margin-top: 20px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      max-width: 300px;
+      text-align: center;
+      animation: fadeIn 1s forwards;
+      position: relative;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      transform: rotate(45deg);
+      animation: float 3s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(45deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-200px) scale(1.5) rotate(45deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="envelope" onclick="openEnvelope()"></div>
+
+  <div class="message" id="message">
+    <h2>Babalar Günü Kutlu Olsun!</h2>
+    <p>Biyolojik bağlardan çok daha öte bir bağla bağlıyız biliyorum. Hayatıma girdiğin günden beri bana bir babadan çok daha fazlası oldun. Bana öğrettiklerin, verdiğin destek ve koşulsuz sevgin için sana ne kadar teşekkür etsem az. Senin gibi biriyle büyüdüğüm için kendimi çok şanslı hissediyorum. İyi ki varsın, iyi ki benim baba figürümsün. Babalar Günün kutlu olsun!</p>
+  </div>
+
+  <script>
+    function openEnvelope() {
+      document.querySelector('.envelope').style.display = 'none';
+      document.getElementById('message').style.display = 'block';
+
+      // Kalpler oluşturuluyor
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.bottom = '-30px';
+        heart.style.animationDuration = 2 + Math.random() * 3 + 's';
+        document.body.appendChild(heart);
+
+        // Kalbi birkaç saniye sonra kaldır
+        setTimeout(() => heart.remove(), 5000);
+      }
+    }
+  </script>
+
+</body>
+</html>
